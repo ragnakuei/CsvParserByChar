@@ -80,6 +80,12 @@ namespace CsvParserByCharLib
                         _streamReader.Read(); // 濾掉結尾雙引號
                         break;
                     }
+                    else if (next == _doubleQuote
+                          && peekNext == _delimiter)
+                    {   // ",
+                        _streamReader.Read(); // 濾掉 Comma
+                        break;
+                    }
                     else
                     {
                         result += next;

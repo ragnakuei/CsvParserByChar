@@ -63,5 +63,22 @@ C";
 
             Assert.AreEqual(expected, actual);
         }
+        
+        /// <summary>
+        /// 第一組字元用雙引號包住雙引號字元
+        /// </summary>
+        [Test]
+        public void FirstSetEncloseDoubleQuoteInDoubleQuotes()
+        {
+            var str = @"""" + @"""" + @"""" + @"""" + ",BB";
+            var stream = StringStreamProvider.ToStream(str);
+
+            var target = new CsvParserByChar(stream);
+            var actual = target.Read();
+
+            var expected = @"""";
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
