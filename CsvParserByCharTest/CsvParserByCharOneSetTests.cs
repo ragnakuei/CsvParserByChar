@@ -43,7 +43,7 @@ namespace CsvParserByCharTest
         }
         
         /// <summary>
-        /// 二個字元
+        /// 包含換行字元
         /// </summary>
         [Test]
         public void MultipleCharsWithNewLine()
