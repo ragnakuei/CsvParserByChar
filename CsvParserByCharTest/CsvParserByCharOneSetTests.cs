@@ -61,6 +61,21 @@ B";
             Assert.AreEqual(expected, actual);
         }
         
-        
+        /// <summary>
+        /// 用雙引號包住一個字元
+        /// </summary>
+        [Test]
+        public void EncloseOneCharInDoubleQuotes()
+        {
+            var str = @"""A""";
+            var stream = StringStreamProvider.ToStream(str);
+            
+            var target = new CsvParserByChar(stream);
+            var actual = target.Read();
+
+            var expected = "A";
+            
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
