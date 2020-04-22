@@ -111,5 +111,23 @@ B";
             
             Assert.AreEqual(expected, actual);
         }
+        
+        /// <summary>
+        /// 用雙引號包住換行字元
+        /// </summary>
+        [Test]
+        public void EncloseNewLineInDoubleQuotes()
+        {
+            var str = @"""" + "\r" + "\n" + @"""";
+            var stream = StringStreamProvider.ToStream(str);
+            
+            var target = new CsvParserByChar(stream);
+            var actual = target.Read();
+
+            var expected = @"
+";
+            
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
