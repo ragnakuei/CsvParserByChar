@@ -41,5 +41,26 @@ namespace CsvParserByCharTest
             
             Assert.AreEqual(expected, actual);
         }
+        
+        /// <summary>
+        /// 二個字元
+        /// </summary>
+        [Test]
+        public void MultipleCharsWithNewLine()
+        {
+            var str = @"A
+B";
+            var stream = StringStreamProvider.ToStream(str);
+            
+            var target = new CsvParserByChar(stream);
+            var actual = target.Read();
+
+            var expected = @"A
+B";
+            
+            Assert.AreEqual(expected, actual);
+        }
+        
+        
     }
 }
