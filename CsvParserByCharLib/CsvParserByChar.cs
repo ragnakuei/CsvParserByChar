@@ -73,17 +73,17 @@ namespace CsvParserByCharLib
                     {   // 連續二個雙引號
                         _streamReader.Read(); // 濾掉第二個雙引號
                         result += next;
-                        continue;
                     }
-
-                    if (next == _doubleQuote
+                    else if (next == _doubleQuote
                      && peekNext == _endOfFile)
                     {   // 結尾雙引號
                         _streamReader.Read(); // 濾掉結尾雙引號
                         break;
                     }
-                    
-                    result += next;
+                    else
+                    {
+                        result += next;
+                    }
                     
                     next = (char)_streamReader.Read();
                     peekNext = (char)_streamReader.Peek();

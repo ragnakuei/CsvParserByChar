@@ -77,5 +77,39 @@ B";
             
             Assert.AreEqual(expected, actual);
         }
+        
+        /// <summary>
+        /// 用雙引號包住逗號字元
+        /// </summary>
+        [Test]
+        public void EncloseCommaInDoubleQuotes()
+        {
+            var str = @""",""";
+            var stream = StringStreamProvider.ToStream(str);
+            
+            var target = new CsvParserByChar(stream);
+            var actual = target.Read();
+
+            var expected = ",";
+            
+            Assert.AreEqual(expected, actual);
+        }
+        
+        /// <summary>
+        /// 用雙引號包住雙引號字元
+        /// </summary>
+        [Test]
+        public void EncloseDoubleQuoteInDoubleQuotes()
+        {
+            var str = @"""" + @"""" + @"""" + @"""";
+            var stream = StringStreamProvider.ToStream(str);
+            
+            var target = new CsvParserByChar(stream);
+            var actual = target.Read();
+
+            var expected = @"""";
+            
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
