@@ -8,7 +8,8 @@ namespace CsvParserByCharLib
         private readonly StreamReader _streamReader;
 
         private const Char _endOfFile = (Char)65535;
-        
+        private const Char _delimiter = ',';
+
         public CsvParserByChar(Stream stream)
         {
             _streamReader = new StreamReader(stream);
@@ -17,13 +18,14 @@ namespace CsvParserByCharLib
         public string Read()
         {
             var result = string.Empty;
-            
+
             var next = (char)_streamReader.Read();
 
-            while (next != _endOfFile)
+            while (next != _endOfFile
+                && next != _delimiter)
             {
                 result += next;
-                
+
                 next = (char)_streamReader.Read();
             }
 

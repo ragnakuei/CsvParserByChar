@@ -3,18 +3,16 @@ using NUnit.Framework;
 
 namespace CsvParserByCharTest
 {
-    public class CsvParserByCharTests
+    /// <summary>
+    /// 一組字元
+    /// </summary>
+    public class CsvParserByCharOneSetTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         /// <summary>
         /// 一個字元
         /// </summary>
         [Test]
-        public void Sample01()
+        public void OneChar()
         {
             var str = "A";
             var stream = StringStreamProvider.ToStream(str);
@@ -31,7 +29,7 @@ namespace CsvParserByCharTest
         /// 二個字元
         /// </summary>
         [Test]
-        public void Sample02()
+        public void TwoChars()
         {
             var str = "AB";
             var stream = StringStreamProvider.ToStream(str);
