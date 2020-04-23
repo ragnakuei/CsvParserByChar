@@ -1,18 +1,18 @@
 using CsvParserByCharLib;
 using NUnit.Framework;
 
-namespace CsvParserByCharTest
+namespace CsvParserByCharTest.OneLine
 {
     /// <summary>
     /// 二組字元
     /// </summary>
-    public class CsvParserByCharTwoSetTests
+    public class CsvParserByCharTwoPropertyTests
     {
         /// <summary>
         /// 第一組字元
         /// </summary>
         [Test]
-        public void FirstSet()
+        public void FirstProperty()
         {
             var str = "AA,BB";
             var stream = StringStreamProvider.ToStream(str);
@@ -29,7 +29,7 @@ namespace CsvParserByCharTest
         /// 第二組字元
         /// </summary>
         [Test]
-        public void SecondSet()
+        public void SecondProperty()
         {
             var str = "AA,BB";
             var stream = StringStreamProvider.ToStream(str);
@@ -47,7 +47,7 @@ namespace CsvParserByCharTest
         /// 第三組字元含換行符號
         /// </summary>
         [Test]
-        public void ThreeSetWithNewLine()
+        public void ThreePropertyWithNewLine()
         {
             var str = @"AA,BB,C
 C";
@@ -68,7 +68,7 @@ C";
         /// 第一組字元用雙引號包住雙引號字元
         /// </summary>
         [Test]
-        public void FirstSetEncloseDoubleQuoteInDoubleQuotes()
+        public void FirstPropertyEncloseDoubleQuoteInDoubleQuotes()
         {
             var str = @"""" + @"""" + @"""" + @"""" + ",BB";
             var stream = StringStreamProvider.ToStream(str);
@@ -85,7 +85,7 @@ C";
         /// 第二組字元用雙引號包住雙引號字元
         /// </summary>
         [Test]
-        public void SecondSetEncloseDoubleQuoteInDoubleQuotes()
+        public void SecondPropertyEncloseDoubleQuoteInDoubleQuotes()
         {
             var str = "AA," + @"""" + @"""" + @"""" + @"""";
             var stream = StringStreamProvider.ToStream(str);

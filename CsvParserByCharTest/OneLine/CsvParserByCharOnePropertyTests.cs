@@ -1,12 +1,12 @@
 using CsvParserByCharLib;
 using NUnit.Framework;
 
-namespace CsvParserByCharTest
+namespace CsvParserByCharTest.OneLine
 {
     /// <summary>
     /// 一組字元
     /// </summary>
-    public class CsvParserByCharOneSetTests
+    public class CsvParserByCharOnePropertyTests
     {
         /// <summary>
         /// 一個字元
