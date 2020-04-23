@@ -42,6 +42,10 @@ namespace CsvParserByCharTest.MultipleLines
             Assert.AreEqual(expected, actual);
             
             actual = target.Read();
+            expected = "\r\n";
+            Assert.AreEqual(expected, actual);
+            
+            actual = target.Read();
             expected = null;
             Assert.AreEqual(expected, actual);
         }

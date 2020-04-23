@@ -16,12 +16,14 @@ namespace CsvParserByCharTest.OneLine
         {
             var str = "A";
             var stream = StringStreamProvider.ToStream(str);
-            
             var target = new CsvParserByChar(stream);
-            var actual = target.Read();
 
+            var actual = target.Read();
             var expected = "A";
+            Assert.AreEqual(expected, actual);
             
+            actual = target.Read();
+            expected = null;
             Assert.AreEqual(expected, actual);
         }
         
@@ -33,12 +35,14 @@ namespace CsvParserByCharTest.OneLine
         {
             var str = "AB";
             var stream = StringStreamProvider.ToStream(str);
-            
             var target = new CsvParserByChar(stream);
-            var actual = target.Read();
-
-            var expected = "AB";
             
+            var actual = target.Read();
+            var expected = "AB";
+            Assert.AreEqual(expected, actual);
+              
+            actual = target.Read();
+            expected = null;
             Assert.AreEqual(expected, actual);
         }
         
@@ -48,16 +52,18 @@ namespace CsvParserByCharTest.OneLine
         [Test]
         public void MultipleCharsWithNewLine()
         {
-            var str = @"A
-B";
+            var str = @"""A
+B""";
             var stream = StringStreamProvider.ToStream(str);
-            
             var target = new CsvParserByChar(stream);
+            
             var actual = target.Read();
-
             var expected = @"A
 B";
+            Assert.AreEqual(expected, actual);
             
+            actual = target.Read();
+            expected = null;
             Assert.AreEqual(expected, actual);
         }
         
@@ -69,12 +75,14 @@ B";
         {
             var str = @"""A""";
             var stream = StringStreamProvider.ToStream(str);
-            
             var target = new CsvParserByChar(stream);
-            var actual = target.Read();
-
-            var expected = "A";
             
+            var actual = target.Read();
+            var expected = "A";
+            Assert.AreEqual(expected, actual);
+            
+            actual = target.Read();
+            expected = null;
             Assert.AreEqual(expected, actual);
         }
         
@@ -86,12 +94,14 @@ B";
         {
             var str = @""",""";
             var stream = StringStreamProvider.ToStream(str);
-            
             var target = new CsvParserByChar(stream);
-            var actual = target.Read();
-
-            var expected = ",";
             
+            var actual = target.Read();
+            var expected = ",";
+            Assert.AreEqual(expected, actual);
+            
+            actual = target.Read();
+            expected = null;
             Assert.AreEqual(expected, actual);
         }
         
@@ -103,12 +113,14 @@ B";
         {
             var str = @"""" + @"""" + @"""" + @"""";
             var stream = StringStreamProvider.ToStream(str);
-            
             var target = new CsvParserByChar(stream);
-            var actual = target.Read();
-
-            var expected = @"""";
             
+            var actual = target.Read();
+            var expected = @"""";
+            Assert.AreEqual(expected, actual);
+            
+            actual = target.Read();
+            expected = null;
             Assert.AreEqual(expected, actual);
         }
         
@@ -120,13 +132,15 @@ B";
         {
             var str = @"""" + "\r" + "\n" + @"""";
             var stream = StringStreamProvider.ToStream(str);
-            
             var target = new CsvParserByChar(stream);
+            
             var actual = target.Read();
-
             var expected = @"
 ";
+            Assert.AreEqual(expected, actual);
             
+            actual = target.Read();
+            expected = null;
             Assert.AreEqual(expected, actual);
         }
     }
