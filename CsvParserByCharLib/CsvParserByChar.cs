@@ -7,7 +7,7 @@ namespace CsvParserByCharLib
     {
         public CsvParserByChar(Stream stream)
         {
-            _streamReader = new StreamReader(stream);
+            _streamReader = new StreamReader(stream, System.Text.Encoding.Default);
         }
 
         public string Read()

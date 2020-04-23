@@ -22,7 +22,7 @@ namespace CsvParserByCharTest.OneLine
             var expected = "AA";
             Assert.AreEqual(expected, actual);
         }
-
+        
         /// <summary>
         /// 第二組字元
         /// </summary>

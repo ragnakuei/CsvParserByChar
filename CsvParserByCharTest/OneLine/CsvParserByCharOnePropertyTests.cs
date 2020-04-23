@@ -28,6 +28,25 @@ namespace CsvParserByCharTest.OneLine
         }
         
         /// <summary>
+        /// 一個中文字
+        /// </summary>
+        [Test]
+        public void FirstChineseProperty()
+        {
+            var str = "一";
+            var stream = StringStreamProvider.ToStream(str);
+            var target = new CsvParserByChar(stream);
+            
+            var actual = target.Read();
+            var expected = "一";
+            Assert.AreEqual(expected, actual);
+            
+            actual = target.Read();
+            expected = null;
+            Assert.AreEqual(expected, actual);
+        }
+        
+        /// <summary>
         /// 二個字元
         /// </summary>
         [Test]
