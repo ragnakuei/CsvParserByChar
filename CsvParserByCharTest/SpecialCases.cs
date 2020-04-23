@@ -6,7 +6,7 @@ namespace CsvParserByCharTest
     public class SpecialCases
     {
         [Test]
-        public void OnlyNewLineTwoLines()
+        public void Case01()
         {
             var str = @"A,B,""""""""""""""www.google.com""""""""
 """"""""我就是要,來搞你"""""""""""""",D
