@@ -80,5 +80,23 @@ C";
 
             Assert.AreEqual(expected, actual);
         }
+        
+        /// <summary>
+        /// 第二組字元用雙引號包住雙引號字元
+        /// </summary>
+        [Test]
+        public void SecondSetEncloseDoubleQuoteInDoubleQuotes()
+        {
+            var str = "AA," + @"""" + @"""" + @"""" + @"""";
+            var stream = StringStreamProvider.ToStream(str);
+
+            var target = new CsvParserByChar(stream);
+            target.Read();
+            var actual = target.Read();
+
+            var expected = @"""";
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
