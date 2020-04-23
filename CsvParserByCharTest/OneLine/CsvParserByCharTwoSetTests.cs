@@ -98,5 +98,27 @@ C";
 
             Assert.AreEqual(expected, actual);
         }
+        
+        /// <summary>
+        /// 第一組字元為空白，第二組字元有值
+        /// </summary>
+        [Test]
+        public void FirstPropertyShouldEmptyAndSecondPropertyNotEmpty()
+        {
+            var str = ",A";
+            var stream = StringStreamProvider.ToStream(str);
+
+            var target = new CsvParserByChar(stream);
+            
+            var actual = target.Read();
+            var expected = string.Empty;
+
+            Assert.AreEqual(expected, actual);
+            
+            actual = target.Read();
+            expected = "A";
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
