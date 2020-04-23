@@ -9,10 +9,10 @@ namespace CsvParserByCharTest.MultipleLines
     public class CsvParserByCharTwoLinesTests
     {
         /// <summary>
-        /// 一欄位二行空字元
+        /// 只有換行字元
         /// </summary>
         [Test]
-        public void FirstProperty()
+        public void OnlyNewLineTwoLines()
         {
             var str = @"
 ";
@@ -21,15 +21,7 @@ namespace CsvParserByCharTest.MultipleLines
             var target = new CsvParserByChar(stream);
 
             var actual = target.Read();
-            var expected = string.Empty;
-            Assert.AreEqual(expected, actual);
-            
-            actual = target.Read();
-            expected = null;
-            Assert.AreEqual(expected, actual);
-            
-            actual = target.Read();
-            expected = string.Empty;
+            string expected = null;
             Assert.AreEqual(expected, actual);
         }
     }

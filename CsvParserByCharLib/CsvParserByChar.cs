@@ -10,6 +10,8 @@ namespace CsvParserByCharLib
         private const Char _endOfFile = (Char)65535;
         private const Char _delimiter = ',';
         private const Char _doubleQuote = '"';
+        private const Char _carriageReturn = '\r';
+        private const Char _lineFeed = '\n';
 
         public CsvParserByChar(Stream stream)
         {
@@ -26,7 +28,11 @@ namespace CsvParserByCharLib
             {
                 result = ParseStartWithDoubleQuota();
             }
-            else
+            else if (peekNext == _carriageReturn)
+            {
+                result = ParseStartWithCarriageReturn();
+            }
+            else 
             {
                 result = ParseNormal();
             }
@@ -52,9 +58,9 @@ namespace CsvParserByCharLib
 
             return result;
         }
-        
+
         /// <summary>
-        /// 解析正常字串
+        /// 解析雙引號
         /// </summary>
         private string ParseStartWithDoubleQuota()
         {
@@ -97,6 +103,27 @@ namespace CsvParserByCharLib
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 以 CarriageReturn 開頭
+        /// <para>如果是換行 \r\n 就回傳 null</para>
+        /// </summary>
+        private string ParseStartWithCarriageReturn()
+        {
+            var carriageReturn = ((char)_streamReader.Read()).ToString();
+            
+            var next = _streamReader.Peek();
+            if (next == _lineFeed)
+            {
+                _streamReader.Read();
+                return null;
+            }
+            else
+            {
+                var result = carriageReturn + Read();
+                return result;
+            }
         }
 
         public void Dispose()
