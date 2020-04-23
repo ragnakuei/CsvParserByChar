@@ -120,5 +120,71 @@ C";
 
             Assert.AreEqual(expected, actual);
         }
+        
+        /// <summary>
+        /// 第一組字元有值，第二組字元為空白
+        /// </summary>
+        [Test]
+        public void TwoPropertiesEmpty()
+        {
+            var str = ",";
+            var stream = StringStreamProvider.ToStream(str);
+
+            var target = new CsvParserByChar(stream);
+            
+            var actual = target.Read();
+            var expected = string.Empty;
+
+            Assert.AreEqual(expected, actual);
+            
+            actual = target.Read();
+            expected = string.Empty;
+
+            Assert.AreEqual(expected, actual);
+        }
+        
+        /// <summary>
+        /// 第一組空字串，第二組為雙引號包住的字串
+        /// </summary>
+        [Test]
+        public void FirstPropertyEmptyAndSecondPropertyEncloseDoubleQuote()
+        {
+            var str = @",""A""";
+            var stream = StringStreamProvider.ToStream(str);
+
+            var target = new CsvParserByChar(stream);
+            
+            var actual = target.Read();
+            var expected = string.Empty;
+
+            Assert.AreEqual(expected, actual);
+            
+            actual = target.Read();
+            expected = "A";
+
+            Assert.AreEqual(expected, actual);
+        }
+        
+        /// <summary>
+        /// 第一組為雙引號包住的字串，第二組空字串
+        /// </summary>
+        [Test]
+        public void FirstPropertyEncloseDoubleQuoteAndSecondPropertyEmpty()
+        {
+            var str = @"""A"",";
+            var stream = StringStreamProvider.ToStream(str);
+
+            var target = new CsvParserByChar(stream);
+            
+            var actual = target.Read();
+            var expected = "A";
+
+            Assert.AreEqual(expected, actual);
+            
+            actual = target.Read();
+            expected = string.Empty;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

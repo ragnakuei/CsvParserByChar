@@ -16,8 +16,4 @@
       <ProjectReference Include="..\CsvParserByCharLib\CsvParserByCharLib.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="MultipleLines" />
-    </ItemGroup>
-
 </Project>
