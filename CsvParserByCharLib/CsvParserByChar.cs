@@ -5,14 +5,6 @@ namespace CsvParserByCharLib
 {
     public class CsvParserByChar : IDisposable
     {
-        private readonly StreamReader _streamReader;
-
-        private const Char _endOfFile = (Char)65535;
-        private const Char _delimiter = ',';
-        private const Char _doubleQuote = '"';
-        private const Char _carriageReturn = '\r';
-        private const Char _lineFeed = '\n';
-
         public CsvParserByChar(Stream stream)
         {
             _streamReader = new StreamReader(stream);
@@ -20,6 +12,12 @@ namespace CsvParserByCharLib
 
         public string Read()
         {
+            if (_isReadNextResult)
+            {
+                _isReadNextResult = false;
+                return _nextResult;
+            }
+            
             var result = string.Empty;
 
             var peekNext = (char)_streamReader.Peek();
@@ -51,6 +49,17 @@ namespace CsvParserByCharLib
             while (next != _endOfFile
                 && next != _delimiter)
             {
+                if (next == _carriageReturn)
+                {
+                    var peekNext = (char)_streamReader.Peek();
+                    if (peekNext == _lineFeed)
+                    {
+                        _nextResult = null;
+                        _isReadNextResult = true;
+                        break;
+                    }
+                }
+                
                 result += next;
 
                 next = (char)_streamReader.Read();
@@ -113,8 +122,8 @@ namespace CsvParserByCharLib
         {
             var carriageReturn = ((char)_streamReader.Read()).ToString();
             
-            var next = _streamReader.Peek();
-            if (next == _lineFeed)
+            var peekNext = _streamReader.Peek();
+            if (peekNext == _lineFeed)
             {
                 _streamReader.Read();
                 return null;
@@ -126,9 +135,20 @@ namespace CsvParserByCharLib
             }
         }
 
+
         public void Dispose()
         {
             _streamReader?.Dispose();
         }
+
+        private readonly StreamReader _streamReader;
+        private const Char _endOfFile = (Char)65535;
+        private const Char _delimiter = ',';
+        private const Char _doubleQuote = '"';
+        private const Char _carriageReturn = '\r';
+        private const Char _lineFeed = '\n';
+
+        private bool _isReadNextResult;
+        private string _nextResult;
     }
 }
